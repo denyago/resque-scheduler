@@ -10,7 +10,7 @@ namespace :resque do
     require 'resque_scheduler'
 
     # Need to set this here for conditional Process.daemon redirect of stderr/stdout to /dev/null
-    Resque::Scheduler.mute = true if ENV['MUTE'] 
+    Resque::Scheduler.mute = true if ENV['MUTE']
 
     if ENV['BACKGROUND']
       unless Process.respond_to?('daemon')
@@ -24,6 +24,7 @@ namespace :resque do
     Resque::Scheduler.dynamic = true if ENV['DYNAMIC_SCHEDULE']
     Resque::Scheduler.verbose = true if ENV['VERBOSE']
     Resque::Scheduler.logfile = ENV['LOGFILE'] if ENV['LOGFILE']
+    Resque::Scheduler.app_name = ENV['APP_NAME'] if ENV['APP_NAME']
     Resque::Scheduler.run
   end
 
